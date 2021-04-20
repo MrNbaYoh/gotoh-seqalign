@@ -117,10 +117,10 @@ impl<F: Fn(usize, usize) -> bool> GotohMatrices<F> {
                     }
                 },
                 GotohMatrix::P => {
-                    if p[[i-1, j-1]] == p[[i-2, j-1]] + self.params.gap_enlargement {
-                        matrix = GotohMatrix::P
-                    } else if p[[i-1, j-1]] == d[[i-1, j]] + self.params.gap_opening + self.params.gap_enlargement {
+                    if p[[i-1, j-1]] == d[[i-1, j]] + self.params.gap_opening + self.params.gap_enlargement {
                         matrix = GotohMatrix::D
+                    } else if p[[i-1, j-1]] == p[[i-2, j-1]] + self.params.gap_enlargement {
+                        matrix = GotohMatrix::P
                     } else {
                         unreachable!()
                     }
@@ -128,10 +128,10 @@ impl<F: Fn(usize, usize) -> bool> GotohMatrices<F> {
                     i -= 1
                 },
                 GotohMatrix::Q => {
-                    if q[[i-1, j-1]] == q[[i-1, j-2]] + self.params.gap_enlargement {
-                        matrix = GotohMatrix::Q
-                    } else if q[[i-1, j-1]] == d[[i, j-1]] + self.params.gap_opening + self.params.gap_enlargement {
+                    if q[[i-1, j-1]] == d[[i, j-1]] + self.params.gap_opening + self.params.gap_enlargement {
                         matrix = GotohMatrix::D
+                    } else if q[[i-1, j-1]] == q[[i-1, j-2]] + self.params.gap_enlargement {
+                        matrix = GotohMatrix::Q
                     } else {
                         unreachable!()
                     }
